@@ -1,0 +1,430 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Cambiar height por min-height */
+    margin: 0;
+    padding: 20px 0; /* Añadir padding vertical */
+    background: linear-gradient(135deg, #f7dc84 0%, #fda085 100%);
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-sizing: border-box; /* Incluir padding en el cálculo del height */
+    overflow-y: auto; /* Permitir scroll si el contenido es más alto */
+}
+
+.instructions-text {
+	font-weight: bold;
+	color: black;
+}
+
+h1 {
+    font: italic bold 30px Arial;
+    color: #776e65;
+    margin: 0;
+}
+
+.last-move {
+    display: flex;
+    align-items: center;
+	min-width: 200px;
+    color: #776e65;
+    font-weight: bold;
+}
+
+.last-move img {
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+/* Contenedor principal que agrupa todo */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px; /* Ancho máximo consistente */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Estilos comunes para todos los contenedores */
+.instructions,
+.title-container,
+.score-container,
+.grid-container {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 2px solid #776e65;
+    border-radius: 25px;
+    background-color: #d5caca;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.title-container {
+    display: flex;
+    justify-content: space-evenly; /* Distribuye los elementos a los extremos */
+    align-items: center; /* Centra verticalmente */
+    width: 100%;
+    padding: 15px 20px; /* Añadir padding horizontal extra para separación */
+}
+
+/* Ajustar el título para que no ocupe demasiado espacio */
+.title-container h1 {
+    margin-right: 20px; /* Espacio entre el título y el último movimiento */
+}
+
+/* Ajuste específico para el grid */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+    aspect-ratio: 1;
+	width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+	touch-action: none; /* Prevenir scroll/zoom mientras se juega */
+    user-select: none; /* Prevenir selección de texto */
+}
+
+.score-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 15px 20px;
+}
+
+/* Contenedor para los scores */
+span {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+    color: #776e65;
+    font-size: 18px;
+}
+
+/* El primer span (Score) alineado a la izquierda */
+span:first-child {
+    text-align: left;
+}
+
+/* El último span (Best Score) se mantiene en el centro */
+span:nth-child(2) {
+    text-align: center;
+}
+
+.restart-icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: transform 0.42s ease;
+}
+
+.scores {
+    display: flex;
+    gap: 20px;
+    font-weight: bold;
+    color: #776e65;
+    font-size: 18px;
+}
+
+
+.rotate {
+    animation: rotate-animation 0.5s ease;
+}
+
+@keyframes rotate-animation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.tile {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(238, 228, 218, 0.35);
+    border-radius: 10px;
+    font-size: 35px;
+    font-weight: bold;
+    color: #776e65;
+    transition: all 0.42s ease-in-out;
+}
+
+.tile-new {
+    animation: appear 0.42s ease-in-out;
+}
+
+@keyframes appear {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.tile-2 {
+    background-color: #eee4da;
+	transition: background-color 0.42s ease-in-out, 
+	color 0.42s ease-in-out, 
+	transform 0.42s ease-in-out;
+}
+
+.tile-4 {
+    background-color: #ede0c8;
+	transition: background-color 0.42s ease-in-out, 
+	color 0.42s ease-in-out, 
+	transform 0.42s ease-in-out;
+}
+
+.tile-8 {
+    background-color: #f2b179;
+    color: #f9f6f2;
+	transition: background-color 0.42s ease-in-out, 
+	color 0.42s ease-in-out, 
+	transform 0.42s ease-in-out;
+}
+
+.tile-16 {
+    background-color: #f59563;
+    color: #f9f6f2;
+	transition: background-color 0.42s ease-in-out, 
+	color 0.42s ease-in-out, 
+	transform 0.42s ease-in-out;
+}
+
+.tile-32 {
+    background-color: #f67c5f;
+    color: #f9f6f2;
+	transition: background-color 0.42s ease-in-out, 
+	color 0.42s ease-in-out, 
+	transform 0.42s ease-in-out;
+}
+
+.tile-64 {
+    background-color: #f65e3b;
+    color: #f9f6f2;
+	transition: background-color 0.42s ease-in-out, 
+	color 0.42s ease-in-out, 
+	transform 0.42s ease-in-out;
+}
+
+.tile-128 {
+    background-color: #edcf72;
+    color: #f9f6f2;
+    font-size: 20px;
+	transition: background-color 0.42s ease-in-out, 
+	color 0.42s ease-in-out, 
+	transform 0.42s ease-in-out;
+}
+
+.tile-256 {
+    background-color: #edcc61;
+    color: #f9f6f2;
+    font-size: 20px;
+	transition: background-color 0.42s ease-in-out, 
+	color 0.42s ease-in-out, 
+	transform 0.42s ease-in-out;
+}
+
+.tile-512 {
+    background-color: #edc850;
+    color: #f9f6f2;
+    font-size: 20px;
+	transition: background-color 0.42s ease-in-out, 
+	color 0.42s ease-in-out, 
+	transform 0.42s ease-in-out;
+}
+
+.tile-1024 {
+    background-color: #edc53f;
+    color: #f9f6f2;
+    font-size: 18px;
+	transition: background-color 0.42s ease-in-out, 
+	color 0.42s ease-in-out, 
+	transform 0.42s ease-in-out;
+}
+
+.tile-2048 {
+    background-color: #edc22e;
+    color: #f9f6f2;
+    font-size: 18px;
+	transition: background-color 0.42s ease-in-out, 
+	color 0.42s ease-in-out, 
+	transform 0.42s ease-in-out;
+}
+
+/* ------------ Media queries ------------ */
+
+@media (max-width: 768px) {
+    body {
+        /* Mantener las mismas propiedades pero ajustadas para móvil */
+        background: linear-gradient(135deg, #f7dc84 0%, #fda085 100%);
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 10px;
+    }
+
+    .game-container {
+        width: 100%; /* Asegurar que el contenedor ocupe todo el ancho disponible */
+        padding: 10px;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    /* Ajustar el ancho máximo para que no desborde en móvil */
+    .title-container,
+    .score-container,
+    .grid-container {
+        max-width: 100%;
+    }
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 480px) {
+    .grid-container {
+        grid-template-columns: repeat(4, minmax(60px, 80px));
+        grid-template-rows: repeat(4, minmax(60px, 80px));
+        gap: 5px;
+    }
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 480px) {
+    .tile {
+        font-size: 25px;
+    }
+}
+
+/* --------------- mobile ---------------- */
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px; /* Espacio entre el SVG y el texto */
+}
+
+.mobile-instructions {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border: solid 2px black;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    padding: 1px;
+}
+
+footer p {
+    color: #776e65;
+    font-size: 14px;
+    margin: 0;
+    text-align: center;
+}
+
+/* CSS del pop-up con las instrucciones */
+/* CSS del pop-up con las instrucciones */
+.mobile-modal {
+    display: none; /* Mantener solo este display */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+/* Añadir una clase separada para cuando el modal esté activo */
+.mobile-modal.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    position: relative;
+    text-align: center;
+    background-color: #faf8ef;
+    margin: 0 auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    border: 2px solid #776e65;
+}
+
+.modal-content h2 {
+    color: #776e65;
+    margin-bottom: 15px;
+}
+
+.modal-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.modal-content li {
+    margin: 10px 0;
+    color: #776e65;
+}
+
+#close-modal {
+    background-color: #8f7a66;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+/* -------------- POP-UP ---------------*/
+
+/* Usar los mismos estilos que el modal de móvil */
+.gameover-modal {
+    display: none;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+/* Los estilos pueden reutilizarse del modal existente */
+.gameover-button {
+    text-align: center;
+    background-color: #8f7a66;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
